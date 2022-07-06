@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TweetController;
 
 use App\Http\Controllers\FavoriteController;
+
+use App\Http\Controllers\RecipeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +18,10 @@ use App\Http\Controllers\FavoriteController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('recipe/create', [RecipeController::class, 'create'])->name('recipe.create');
+Route::get('recipe/{recipe}', [RecipeController::class, 'show'])->name('recipe.show');
+Route::post('recipe', [RecipeController::class, 'store'])->name('recipe.store');
+
 Route::group(['middleware' => 'auth'], function () {
  Route::post('tweet/{tweet}/favorites', [FavoriteController::class, 'store'])->name('favorites');
   Route::post('tweet/{tweet}/unfavorites', [FavoriteController::class, 'destroy'])->name('unfavorites');
